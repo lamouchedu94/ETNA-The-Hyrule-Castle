@@ -1,6 +1,6 @@
 export default class GameSettings {
+
     private readonly difficulty: number;
-  
     private readonly round : number;
   
     constructor(difficulty : number, round : number) {
