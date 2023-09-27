@@ -34,21 +34,29 @@ export function getHeroBaseHp(hero : Hero) {
     return heroBaseHp
 }
 
+export function makeBar(currentHp : number, maxHp : number) {
+    let hpBar : string = ""
+    for (let i = 0; i < currentHp; i+=1) {
+        hpBar+="I"
+    }
+    for (let i = 0; i < maxHp-currentHp; i+=1) {
+        hpBar+="—"
+    }
+    return hpBar
+}
+
 export function combat(fightNumber : number, enemie : Enemie, hero : Hero) {
     console.log(`========== FIGHT ${fightNumber} ==========`)
     console.log(`\x1B[31m${enemie.name}\x1B[0m`)
-    let hpBar : string = ""
-    for (let i = 0; i < enemie.hp; i+=1) {
-        hpBar+="I"
-    }
+    let hpBar = makeBar(enemie.hp, getEnemieBaseHp(enemie))
     console.log(`Hp : ${hpBar} ${enemie.hp}/${getEnemieBaseHp(enemie)}\n`)
     
     console.log(`\x1B[32m${hero.name}\x1B[0m`)
-    hpBar = ""
-    for (let i = 0; i < hero.hp; i+=1) {
-        hpBar+="I"
-    }
-    console.log(`Hp : ${hpBar} ${hero.hp}/${getHeroBaseHp(hero)}`)
+    hpBar = makeBar(hero.hp, getHeroBaseHp(hero))
+    console.log(`Hp : ${hpBar} ${hero.hp}/${getHeroBaseHp(hero)}\n`)
+    console.log('——— Options ——————————————')
+    console.log('1. Attack   2. Heal')
+    
 }
 
 let enemieTest : Enemie = {
@@ -70,7 +78,7 @@ let enemieTest : Enemie = {
 let heroTest : Hero = {
     id:1,
     name:"Link",
-    hp:60,
+    hp:40,
     mp:30,
     str:15,
     int:7,
