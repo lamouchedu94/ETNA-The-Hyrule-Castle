@@ -35,12 +35,12 @@ function selectRoundsNumber() {
   let userInput = '';
   do {
     console.log('Choose your rounds numbers :');
-    userInput = rl.question('1 - 10 rounds\t2 - 20 rounds\t3 - 50 rounds\t4 - 100 rounds\n');
+    userInput = rl.question('1 - 10 rounds\t2 - 20 rounds\t3 - 50 rounds\t4 - 1000 rounds\n');
   } while (userInput !== '1' && userInput !== '2' && userInput !== '3' && userInput !== '4');
   if (userInput === '1') return 10;
   if (userInput === '2') return 20;
   if (userInput === '3') return 50;
-  return 100;
+  return 1000;
 }
 
 export default function startGame() {
