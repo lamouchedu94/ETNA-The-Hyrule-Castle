@@ -1,7 +1,24 @@
 import Character from './Character';
 import CharacterInterface from './CharacterInterface';
 
-export default class Enemy extends Character {
+export interface EnemieInterface {
+  //this is temp
+  id: number,
+  name: string,
+  hp: number,
+  mp: number,
+  str: number,
+  int: number,
+  def: number,
+  res: number,
+  spd: number,
+  luck: number,
+  race: number,
+  class: number,
+  rarity: number
+}
+
+export class Enemy extends Character {
   constructor(character : CharacterInterface, difficulty: number) {
     super(character);
     this.hp *= difficulty;
