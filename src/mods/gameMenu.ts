@@ -1,4 +1,4 @@
-import GameSettings from './gameSettings';
+import GameSettings from './GameSettings';
 
 const rl = require('readline-sync');
 
@@ -58,4 +58,3 @@ export default function startGame() {
   } return null;
 }
  
-

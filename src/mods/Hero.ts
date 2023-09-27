@@ -1,6 +1,9 @@
 import CharacterInterface from './CharacterInterface';
 
 export default class Character {
+  addXp(xp: number) {
+    throw new Error('Method not implemented.');
+  }
     
   protected readonly class: number;
   protected def: number;
