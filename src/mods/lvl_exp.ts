@@ -1,4 +1,4 @@
-//import Hero from './Hero';
+import Hero from './Hero';
 
 const minXp = 15;
 const maxXp = 50;
