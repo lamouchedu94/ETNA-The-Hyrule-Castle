@@ -1,0 +1,24 @@
+{
+    "name": "fdi-dts1",
+    "version": "1.0.0",
+    "description": "Example package.json for the ETNA TS pool",
+    "main": "index.ts",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "npm run build && node build/hyrule_castle.js",
+      "build": "tsc ",
+      "clean": "rm -rf build"
+    },
+    "author": "Shayman SALOMON",
+    "license": "ISC",
+    "dependencies": {
+      "eslint-config-airbnb-base": "^15.0.0",
+      "eslint-config-airbnb-typescript": "^17.0.0",
+      "readline-sync": "^1.4.10"
+    },
+    "devDependencies": {
+      "@types/node": "^18.8.4",
+      "play-sound": "^1.1.5"
+    }
+  }
+  
