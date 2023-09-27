@@ -23,8 +23,8 @@ function displayLogo() {
 function selectDifficulty() {
   let userInput = '';
   do {
-    console.log('Choose your difficulty :');
-    userInput = rl.question('1 - Normal\t2 - Difficult\t3 - Insane\n');
+    console.log('Choose skill level :');
+    userInput = rl.question('1 - I\'m to young to die\t2 - Hey, not too rought\t3 - Hurt me plenty\n');
   } while (userInput !== '1' && userInput !== '2' && userInput !== '3');
   if (userInput === '1') return 1;
   if (userInput === '2') return 1.5;
@@ -35,7 +35,7 @@ function selectRoundsNumber() {
   let userInput = '';
   do {
     console.log('Choose your rounds numbers :');
-    userInput = rl.question('1 - 10 rounds\t2 - 20 rounds\t3 - 50 rounds\t4 - 1000 rounds\n');
+    userInput = rl.question('1 - 10 rounds\t2 - 20 rounds\t3 - 50 rounds\t4 - 100 rounds\n');
   } while (userInput !== '1' && userInput !== '2' && userInput !== '3' && userInput !== '4');
   if (userInput === '1') return 10;
   if (userInput === '2') return 20;
@@ -45,7 +45,7 @@ function selectRoundsNumber() {
 
 export default function startGame() {
   let userInput = '';
-  console.log('Welcome to the HYRULE CASTLE ٩(｡•́‿•̀｡)۶');
+  console.log('Welcome to the --HYRULE CASTLE-- !!');
   displayLogo();
   console.log('1 - Let\'s play\t2 - Quit');
   do {
@@ -58,3 +58,4 @@ export default function startGame() {
   } return null;
 }
  
+
