@@ -51,7 +51,9 @@ export function makeBar(currentHp : number, maxHp : number) {
     return hpBar + "]"
 }
 
-export function combat(fightNumber : number, enemie : Enemie, hero : Hero) {
+export function combat(enemie : Enemie, hero : Hero) {
+    let fightNumber = 1
+    
     console.log(`========== FIGHT ${fightNumber} ==========`)
     console.log(`\x1B[31m${enemie.name}\x1B[0m`)
     let hpBar = makeBar(enemie.hp, getEnemieBaseHp(enemie))
@@ -97,4 +99,4 @@ let heroTest : Hero = {
     rarity:1
 }
 
-combat(1,enemieTest, heroTest)
+combat(enemieTest, heroTest)
