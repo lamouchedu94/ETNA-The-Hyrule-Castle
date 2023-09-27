@@ -1,108 +1,86 @@
+import Character from './Character';
 import CharacterInterface from './CharacterInterface';
 
-export default class Character {
-  addXp(xp: number) {
-    throw new Error('Method not implemented.');
-  }
-    
-  protected readonly class: number;
-  protected def: number;
-  protected hp: number;
-  protected int: number;
-  protected luck: number;
-  protected maxHp: number;
-  protected mp: number;
-  protected readonly name: string;
-  protected readonly race: number;
-  protected readonly rarity: number;
-  protected res: number;
-  protected spd: number;
-  protected str: number;
+export default class Hero extends Character {
+  private coins: number;
 
-  constructor(character : CharacterInterface) {
-    this.name = character.name;
-    this.def = character.def;
-    this.int = character.int;
-    this.hp = character.hp;
-    this.maxHp = character.hp;
-    this.race = character.race;
-    this.res = character.res;
-    this.spd = character.spd;
-    this.str = character.str;
-    this.mp = character.mp;
-    this.luck = character.luck;
-    this.class = character.class;
-    this.rarity = character.rarity;
-  }
+  private lvl: number;
 
-  public get getHp(): number {
-    return this.hp;
-  }
+  private xp: number;
 
-  public set setHp(value: number) {
-    this.hp = value;
-    if (this.hp > this.maxHp) this.hp = this.maxHp;
-  }
+  private xpToLvlUp: number;
 
-  public get getDef(): number {
-    return this.def;
-  }
-
-  public get getInt(): number {
-    return this.int;
-  }
-
-  public get getLuck(): number {
-    return this.luck;
-  }
-
-  public get getMaxHp(): number {
-    return this.maxHp;
-  }
-
-  public get getMp(): number {
-    return this.mp;
+  constructor(character : CharacterInterface, coins : number) {
+    super(character);
+    this.coins = coins;
+    this.xp = 0;
+    this.lvl = 1;
+    this.xpToLvlUp = 30;
   }
 
   public get getName(): string {
-    return this.name.toUpperCase();
+    return `\x1b[32m${this.name.toUpperCase()}\x1b[0m`;
   }
 
-  public get getRes(): number {
-    return this.res;
+  public displayInfo() : void {
+    let healthBar = '';
+    console.log(`\x1b[32m${this.name.toUpperCase()}\x1b[0m (LVL ${this.lvl})`);
+    for (let i = 0; i < this.hp; i += 1) healthBar += '\u2665 ';
+    console.log(`\x1b[31m${healthBar}\x1b[0m`);
+    console.log(`HP : ${this.hp}/${this.maxHp}`);
+    console.log(`Strength : ${this.str} - Defense : ${this.def} - Speed : ${this.spd}`);
+    console.log(`XP : ${this.xp}/${this.xpToLvlUp}`);
+    console.log(`Rupees : ${this.coins}`);
   }
 
-  public get getSpd(): number {
-    return this.spd;
+  public addCoins(coins: number): void {
+    console.log(`You gained ${coins} rupees`);
+    this.coins += coins;
   }
 
-  get getStr(): number {
-    return this.str;
-  }
-
-  private dodge(enemy: Character): boolean {
-    const dodgeChance = enemy.getSpd - this.spd;
-    if (dodgeChance > 0) {
-      const dodge = Math.floor(Math.random() * 100 + 1);
-      if (dodgeChance >= dodge) {
-        console.log(`${enemy.getName} dodged ${this.getName} attack`);
-        return true;
-      }
+  private gainStat(): void {
+    const stat = Math.floor(Math.random() * 3 + 1);
+    switch (stat) {
+      case 1:
+        console.log('You gained 2 point of strength');
+        this.str += 2;
+        break;
+      case 2:
+        console.log('You gained 5 point of HP');
+        this.maxHp += 5;
+        this.hp += 5;
+        break;
+      case 3:
+        console.log('You gained 1 point of defense');
+        this.res += 1;
+        break;
+      case 4:
+        console.log('You gained 1 point of speed');
+        this.spd += 1;
+        break;
+      default:
+        break;
     }
-    return false;
   }
 
-  public attack(enemy: Character): void {
-    let damage = this.getStr;
-    if (!this.dodge(enemy)) {
-      const critChance = Math.floor(Math.random() * 100 + 1);
-      if (this.getLuck >= critChance) {
-        console.log(`${this.getName} inflicts a critical strike`);
-        damage *= 2;
-      }
-      damage = Math.floor(damage - damage * (enemy.getDef / 100));
-      console.log(`${this.getName} attacks ${enemy.getName} for ${damage} damages`);
-      enemy.setHp = enemy.getHp - damage;
+  private lvlUp(): void {
+    this.lvl += 1;
+    this.xp -= this.xpToLvlUp;
+    this.xpToLvlUp += ((this.lvl - 2) + 1);
+    console.log(`${this.name} gains 1 lvl. You are now level ${this.lvl}`);
+    this.gainStat();
+  }
+
+  public addXp(xp: number): void {
+    this.xp += xp;
+    console.log(`${this.name.toUpperCase()} gains ${xp} experience points`);
+    while (this.xp >= this.xpToLvlUp) {
+      this.lvlUp();
     }
+  }
+
+  public heal(): void {
+    console.log(`${this.name.toUpperCase()} heals for ${Math.floor(this.maxHp / 2)} hp`);
+    this.setHp = this.getHp + Math.floor(this.maxHp / 2);
   }
 }
