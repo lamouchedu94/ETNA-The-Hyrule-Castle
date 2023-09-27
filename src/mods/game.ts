@@ -1,10 +1,9 @@
-import {EnemieInterface} from "./Enemy"
-import Hero from "./CharacterInterface"
+import Character from "./CharacterInterface"
 import * as fs from "fs" 
-import { getUserInput } from "./userinput"
-import { waitUserInput } from "./userinput"
+import { getUserInput } from "./userInput"
+import { waitUserInput } from "./userInput"
 
-export function getEnemieBaseHp(enemie : EnemieInterface) {
+export function getEnemieBaseHp(enemie : Character) {
     //Take in parameter one object Enemie and return base hp of the Enemie
     const file = fs.readFileSync("./json/enemies.json","utf-8")
     const enemieData = JSON.parse(file)
@@ -21,7 +20,7 @@ export function getEnemieBaseHp(enemie : EnemieInterface) {
     return enemieBaseHp
 }
 
-export function getHeroBaseHp(hero : Hero) {
+export function getHeroBaseHp(hero : Character) {
     //Take in parameter one object Hero and return base hp of the Hero
     const file = fs.readFileSync("./json/players.json","utf-8")
     const heroData = JSON.parse(file)
@@ -56,7 +55,7 @@ export function makeBar(currentHp : number, maxHp : number) {
     return hpBar + "]"
 }
 
-export function combat(enemie : EnemieInterface, hero : Hero, turn : number) {
+export function combat(enemie : Character, hero : Character, turn : number) {
     
     if (turn === 1) {
         if (enemie.hp - hero.str < 0) {
@@ -73,7 +72,7 @@ export function combat(enemie : EnemieInterface, hero : Hero, turn : number) {
     }
 }
 
-export function display(enemie : EnemieInterface, hero : Hero, fightNumber : number) {
+export function display(enemie : Character, hero : Character, fightNumber : number) {
     console.log(`\n========== FIGHT ${fightNumber} ==========`)
     console.log(`\x1B[31m${enemie.name}\x1B[0m`)
     let hpBar = makeBar(enemie.hp, getEnemieBaseHp(enemie))
@@ -89,7 +88,7 @@ export function display(enemie : EnemieInterface, hero : Hero, fightNumber : num
     }
 }
 
-export function playerTurn(enemie : EnemieInterface, hero : Hero) {
+export function playerTurn(enemie : Character, hero : Character) {
     
     let fightNumber = 1
     while (enemie.hp > 0 && hero.hp > 0){
@@ -126,7 +125,7 @@ export function playerTurn(enemie : EnemieInterface, hero : Hero) {
     }
 }
 
-let enemieTest : EnemieInterface = {
+let enemieTest : Character = {
     id:1,
     name:"Dead Hand",
     hp:40,
@@ -142,7 +141,7 @@ let enemieTest : EnemieInterface = {
     rarity:3
 }
 
-let heroTest : Hero = {
+let heroTest : Character = {
     id:1,
     name:"Link",
     hp:60,
