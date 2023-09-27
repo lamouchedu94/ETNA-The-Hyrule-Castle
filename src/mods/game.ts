@@ -1,13 +1,29 @@
 import Enemie from "./Enemy"
+import * as fs from "fs" 
+
 
 export function combat(fightNumber : number, enemie : Enemie) {
+    const file = fs.readFileSync("./json/enemies.json","utf-8")
+    const enemieData = JSON.parse(file)
+    let enemieBaseHp = 0
+    for (const elem of enemieData) {
+        if (elem.id ===enemie.id) {
+            enemieBaseHp = elem.hp
+        } 
+    }    
+    if (enemieBaseHp === 0) {
+        return true
+    }
+
     console.log(`========== FIGHT ${fightNumber} ==========`)
     console.log(`\x1B[31m${enemie.name}\x1B[0m`)
     let hpBar : string = ""
     for (let i = 0; i < enemie.hp; i+=1) {
         hpBar+="I"
     }
-    console.log(`Hp : ${hpBar}`)
+    console.log(`Hp : ${hpBar} ${enemie.hp}/${enemieBaseHp}`)
+
+    return false
 }
 let enemieTest : Enemie = {
     id:1,
