@@ -21,6 +21,9 @@ export default function fight(hero : Hero, enemy : Enemy) {
   const userChoice = getUserInput();
   if (hero.getSpd >= enemy.getSpd) {
     console.log(`${hero.getName} moves first`);
+    if (userChoice === 3) {
+      return 'Leave'
+    } 
     heroAction(hero, enemy, userChoice);
     if (enemy.getHp > 0) {
       enemy.attack(hero);

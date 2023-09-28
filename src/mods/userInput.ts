@@ -8,11 +8,9 @@ export default function getUserInput() {
       return 1;
     } if (userChoice === '2') {
       return 2;
+    } if (userChoice === '3') {
+      return 3;
     }
   } while (userChoice !== '1' && userChoice !== '2');
   return 0;
 }
-
-// export function waitUserInput() {
-//   rl.question()
-// }
