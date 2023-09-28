@@ -42,13 +42,17 @@ export default class Hero extends Character {
     console.log(`Strength : ${this.str} - Defense : ${this.def} - Speed : ${this.spd}`);
     console.log(`XP : ${this.xp}/${this.xpToLvlUp}`);
     console.log(`Rupees : ${this.coins}`);
-    this.displayInventory
+    //this.displayInventory
   }
 
   public displayInventory() : void {
-    console.log("you actually have :")
-    for (const elem of this.inventory) {
-      console.log(elem)
+    if (this.inventory.length === 0) {
+      console.log('You have nothing for the moment!')  
+    } else  {
+      console.log("you actually have :")
+      for (const elem of this.inventory) {
+        console.log(elem)
+      }
     }
   }
 

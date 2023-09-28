@@ -22,7 +22,10 @@ export default function fight(hero : Hero, enemy : Enemy) {
   if (hero.getSpd >= enemy.getSpd) {
     console.log(`${hero.getName} moves first`);
     if (userChoice === 3) {
-      return 'Leave'
+      return 3
+    } 
+    if (userChoice === 4) {
+      return 4
     } 
     heroAction(hero, enemy, userChoice);
     if (enemy.getHp > 0) {

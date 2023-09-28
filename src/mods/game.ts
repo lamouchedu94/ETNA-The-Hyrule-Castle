@@ -45,12 +45,16 @@ export default function startGame(game : GameSettings) {
       console.log(`New enemy appear : ${enemy.getName} ${enemy.getHp}`);
       fightIsOver = false;
     }
-    displayRound(floor, hero, enemy);    
-    if (fight(hero, enemy) === "Leave"){
+    displayRound(floor, hero, enemy);   
+    const repUtil = fight(hero, enemy)
+    if (repUtil === 3) {
+      hero.displayInventory()
+    }
+    if (repUtil === 4){
       console.log('You leave the fight.');
       fightIsOver = true;
     };
-    hero.displayInventory()
+    
     if (hero.getHp <= 0) console.log('\x1b[31mYOU LOST\x1b[             0m');
     else if (enemy.getHp <= 0) {
       console.log(`You beated ${enemy.getName}`);
@@ -58,7 +62,7 @@ export default function startGame(game : GameSettings) {
       fightIsOver = true;
       floor += 1;
       hero.addCoins(1);
-      hero.addItem(1,5)
+      hero.addItem(1,5);
     }
     rl.question('Press enter to continue');
   }
