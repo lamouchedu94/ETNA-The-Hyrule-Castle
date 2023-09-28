@@ -12,7 +12,9 @@ export default function getUserInput() {
       return 3;
     } if (userChoice === '4') {
       return 4;
+    } if (userChoice === '5') {
+      return 5;
     }
-  } while (userChoice !== '1' && userChoice !== '2' && userChoice !== '3' && userChoice !== '4');
+  } while (userChoice !== '1' && userChoice !== '2' && userChoice !== '3' && userChoice !== '4' && userChoice !== '5');
   return 0;
 }

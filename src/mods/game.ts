@@ -4,7 +4,8 @@ import Enemy from './Enemy';
 import GameSettings from './GameSettings';
 import { getBosses, getCharacters, getEnemies } from './jsonUtilities';
 import { createEnemy, createHero } from './createCharacter';
-import displayRound from './display';
+import { displayRound } from './display';
+import { displayMenu } from './display';
 import gainXp from './lvl_exp';
 import fight from './better_combat_options';
 
@@ -53,6 +54,9 @@ export default function startGame(game : GameSettings) {
     if (repUtil === 4){
       console.log('You leave the fight.');
       fightIsOver = true;
+    };
+    if (repUtil === 5){
+      displayMenu();
     };
     
     if (hero.getHp <= 0) console.log('\x1b[31mYOU LOST\x1b[             0m');

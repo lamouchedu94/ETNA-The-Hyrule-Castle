@@ -27,6 +27,9 @@ export default function fight(hero : Hero, enemy : Enemy) {
     if (userChoice === 4) {
       return 4
     } 
+    if (userChoice === 5) {
+      return 5
+    }
     heroAction(hero, enemy, userChoice);
     if (enemy.getHp > 0) {
       enemy.attack(hero);
