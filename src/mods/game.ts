@@ -62,7 +62,7 @@ export default function startGame(game : GameSettings) {
       fightIsOver = true;
       floor += 1;
       hero.addCoins(1);
-      hero.addItem(1,5);
+      hero.addItem(1);
     }
     rl.question('Press enter to continue');
   }

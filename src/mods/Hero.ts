@@ -1,6 +1,7 @@
 import Character from './Character';
 import CharacterInterface from './CharacterInterface';
 import { makeBar } from './game';
+import * as fs from 'fs'
 
 interface Inventory {
   id: number,
@@ -42,7 +43,6 @@ export default class Hero extends Character {
     console.log(`Strength : ${this.str} - Defense : ${this.def} - Speed : ${this.spd}`);
     console.log(`XP : ${this.xp}/${this.xpToLvlUp}`);
     console.log(`Rupees : ${this.coins}`);
-    //this.displayInventory
   }
 
   public displayInventory() : void {
@@ -51,7 +51,8 @@ export default class Hero extends Character {
     } else  {
       console.log("you actually have :")
       for (const elem of this.inventory) {
-        console.log(elem)
+        console.log(`${this.getItemName(elem.idItem)} (x${elem.itemNumber})`)
+        
       }
     }
   }
@@ -107,14 +108,43 @@ export default class Hero extends Character {
     this.setHp = this.getHp + Math.floor(this.maxHp / 2);
   }
 
-  public addItem(idt: number, idItema: number) {
+  public addItem(idItem: number) : void {
     const test : Inventory = {
-      id: idt,
-      idItem: idItema, 
-      itemNumber: 1
+      id: this.getMaxItemId()+1,
+      idItem: 1, 
+      itemNumber: this.getNumberOfCurrentItem(idItem)+1
     }
     this.inventory.push(test)
-    console.log(this.inventory[0])
+    //console.log(this.inventory[0])
 
+  }
+
+  private getNumberOfCurrentItem(id : number) {
+    for (const elem of this.inventory) {
+      if (elem.id === id) {
+        return elem.itemNumber
+      }
+    } 
+    return 0
+  }
+
+  private getMaxItemId() {
+    let tab = []
+    for (const elem of this.inventory) {
+      tab.push(elem.id)
+    }
+    console.log(tab.sort((n2,n1) => n1 - n2))
+    return tab[0]
+  }
+
+  public getItemName(id : number) : void {
+    //Return name of Item by id
+    const file = fs.readFileSync('./json/potions.json', 'utf-8')
+    const fileContent = JSON.parse(file)
+    for (const item of fileContent) {
+      if (item.id === id) {
+        return item.name
+      }
+    }
   }
 }
