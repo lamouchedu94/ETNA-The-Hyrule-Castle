@@ -1,6 +1,13 @@
 import Character from './Character';
 import CharacterInterface from './CharacterInterface';
 import { makeBar } from './game';
+
+interface Inventory {
+  id: number,
+  idItem: number,
+  itemNumber: number,
+}
+
 export default class Hero extends Character {
   private coins: number;
 
@@ -10,12 +17,15 @@ export default class Hero extends Character {
 
   private xpToLvlUp: number;
 
+  private inventory: Inventory[]  
+
   constructor(character : CharacterInterface, coins : number) {
     super(character);
     this.coins = coins;
     this.xp = 0;
     this.lvl = 1;
     this.xpToLvlUp = 30;
+    this.inventory = []
   }
 
   public get getName(): string {
@@ -32,6 +42,14 @@ export default class Hero extends Character {
     console.log(`Strength : ${this.str} - Defense : ${this.def} - Speed : ${this.spd}`);
     console.log(`XP : ${this.xp}/${this.xpToLvlUp}`);
     console.log(`Rupees : ${this.coins}`);
+    this.displayInventory
+  }
+
+  public displayInventory() : void {
+    console.log("you actually have :")
+    for (const elem of this.inventory) {
+      console.log(elem)
+    }
   }
 
   public addCoins(coins: number): void {
@@ -83,5 +101,16 @@ export default class Hero extends Character {
   public heal(): void {
     console.log(`${this.name.toUpperCase()} heals for ${Math.floor(this.maxHp / 2)} hp`);
     this.setHp = this.getHp + Math.floor(this.maxHp / 2);
+  }
+
+  public addItem(idt: number, idItema: number) {
+    const test : Inventory = {
+      id: idt,
+      idItem: idItema, 
+      itemNumber: 1
+    }
+    this.inventory.push(test)
+    console.log(this.inventory[0])
+
   }
 }

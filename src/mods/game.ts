@@ -50,6 +50,7 @@ export default function startGame(game : GameSettings) {
       console.log('You leave the fight.');
       fightIsOver = true;
     };
+    hero.displayInventory()
     if (hero.getHp <= 0) console.log('\x1b[31mYOU LOST\x1b[             0m');
     else if (enemy.getHp <= 0) {
       console.log(`You beated ${enemy.getName}`);
@@ -57,6 +58,7 @@ export default function startGame(game : GameSettings) {
       fightIsOver = true;
       floor += 1;
       hero.addCoins(1);
+      hero.addItem(1,5)
     }
     rl.question('Press enter to continue');
   }
