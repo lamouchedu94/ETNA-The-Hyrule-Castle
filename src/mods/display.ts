@@ -13,9 +13,10 @@ export function displayRound(floor : number, hero : Hero, ennemy : Enemy) {
 export function displayMenu() {
   console.log(`================== GAME MENU ==================`)
   console.log(`1 Use objects`)
-  console.log(`2 Save`)
-  console.log(`3 Save and Quit`)
-  console.log(`4 Quit (witout saving)`)
+  console.log(`2 Shop`)
+  console.log(`3 Save`)
+  console.log(`4 Save and Quit`)
+  console.log(`5 Quit (witout saving)`)
   const userInput = getUserInput()
   if (userInput === 4) {
     console.log(`\nSee you later !`)
