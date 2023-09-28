@@ -1,10 +1,12 @@
 [
     {
         "id": 1,
-        "name": "heal potion"
+        "name": "heal potion",
+        "number": 0
     },
     {
         "id": 2,
-        "name": "strength potion"
+        "name": "strength potion",
+        "number": 0
     }
 ]

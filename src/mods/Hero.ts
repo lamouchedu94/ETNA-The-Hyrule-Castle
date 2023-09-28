@@ -5,8 +5,8 @@ import * as fs from 'fs'
 
 interface Inventory {
   id: number,
-  idItem: number,
-  itemNumber: number,
+  name: string,
+  number: number,
 }
 
 export default class Hero extends Character {
@@ -27,6 +27,16 @@ export default class Hero extends Character {
     this.lvl = 1;
     this.xpToLvlUp = 30;
     this.inventory = []
+    this.initialiseInventory()
+  }
+
+  private initialiseInventory() {
+    const file = fs.readFileSync('./json/potions.json', 'utf-8')
+    const fileContent = JSON.parse(file)
+    console.log(fileContent)
+    for (const item of fileContent) {
+      this.inventory.push(item)
+    }
   }
 
   public get getName(): string {
@@ -46,15 +56,19 @@ export default class Hero extends Character {
   }
 
   public displayInventory() : void {
-    if (this.inventory.length === 0) {
-      console.log('You have nothing for the moment!')  
-    } else  {
-      console.log("you actually have :")
-      for (const elem of this.inventory) {
-        console.log(`${this.getItemName(elem.idItem)} (x${elem.itemNumber})`)
-        
+    let rien = false
+    console.log("you actually have :")
+    for (const elem of this.inventory) {
+      if (elem.number > 0){
+        console.log(`${this.getItemName(elem.id)} (x${elem.number})`)
+        rien = true
       }
+      
     }
+    if (!rien) {
+      console.log('Nothing in your inventory')  
+    }
+    
   }
 
   public addCoins(coins: number): void {
@@ -109,12 +123,11 @@ export default class Hero extends Character {
   }
 
   public addItem(idItem: number) : void {
-    const test : Inventory = {
-      id: this.getMaxItemId()+1,
-      idItem: 1, 
-      itemNumber: this.getNumberOfCurrentItem(idItem)+1
+    for (const item of this.inventory) {
+      if (item.id === idItem) {
+        item.number += 1
+      }  
     }
-    this.inventory.push(test)
     //console.log(this.inventory[0])
 
   }
@@ -122,19 +135,10 @@ export default class Hero extends Character {
   private getNumberOfCurrentItem(id : number) {
     for (const elem of this.inventory) {
       if (elem.id === id) {
-        return elem.itemNumber
+        return elem.number
       }
     } 
     return 0
-  }
-
-  private getMaxItemId() {
-    let tab = []
-    for (const elem of this.inventory) {
-      tab.push(elem.id)
-    }
-    console.log(tab.sort((n2,n1) => n1 - n2))
-    return tab[0]
   }
 
   public getItemName(id : number) : void {
