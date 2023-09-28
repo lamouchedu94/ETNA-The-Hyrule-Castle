@@ -1,6 +1,6 @@
 import Character from './Character';
 import CharacterInterface from './CharacterInterface';
-
+import { makeBar } from './game';
 export default class Hero extends Character {
   private coins: number;
 
@@ -25,7 +25,8 @@ export default class Hero extends Character {
   public displayInfo() : void {
     let healthBar = '';
     console.log(`\x1b[32m${this.name.toUpperCase()}\x1b[0m (LVL ${this.lvl})`);
-    for (let i = 0; i < this.hp; i += 1) healthBar += '\u2665 ';
+    //for (let i = 0; i < this.hp; i += 1) healthBar += '\u2665 ';
+    healthBar = makeBar(this.hp, this.getMaxHp)
     console.log(`\x1b[31m${healthBar}\x1b[0m`);
     console.log(`HP : ${this.hp}/${this.maxHp}`);
     console.log(`Strength : ${this.str} - Defense : ${this.def} - Speed : ${this.spd}`);
