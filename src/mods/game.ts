@@ -8,6 +8,7 @@ import { displayRound } from './display';
 import { displayMenu } from './display';
 import gainXp from './lvl_exp';
 import fight from './better_combat_options';
+import getUserInput from './userInput';
 
 const rl = require('readline-sync');
 
@@ -57,6 +58,7 @@ export default function startGame(game : GameSettings) {
     };
     if (repUtil === 5){
       displayMenu();
+      menu(getUserInput())
     };
     
     if (hero.getHp <= 0) console.log('\x1b[31mYOU LOST\x1b[             0m');
@@ -69,5 +71,12 @@ export default function startGame(game : GameSettings) {
       hero.addItem(1);
     }
     rl.question('Press enter to continue');
+  }
+}
+
+export function menu(userInput : number) {
+  if (userInput === 5) {
+    console.log(`\nSee you later !`)     
+    process.exit(1)
   }
 }

@@ -17,9 +17,4 @@ export function displayMenu() {
   console.log(`3 Save`)
   console.log(`4 Save and Quit`)
   console.log(`5 Quit (witout saving)`)
-  const userInput = getUserInput()
-  if (userInput === 4) {
-    console.log(`\nSee you later !`)
-    process.exit(1)
-  }
 }
