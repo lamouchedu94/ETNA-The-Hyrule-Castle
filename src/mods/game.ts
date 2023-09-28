@@ -45,9 +45,12 @@ export default function startGame(game : GameSettings) {
       console.log(`New enemy appear : ${enemy.getName} ${enemy.getHp}`);
       fightIsOver = false;
     }
-    displayRound(floor, hero, enemy);
-    fight(hero, enemy);
-    if (hero.getHp <= 0) console.log('\x1b[31mYOU LOST\x1b[0m');
+    displayRound(floor, hero, enemy);    
+    if (fight(hero, enemy) === "Leave"){
+      console.log('You leave the fight.');
+      fightIsOver = true;
+    };
+    if (hero.getHp <= 0) console.log('\x1b[31mYOU LOST\x1b[             0m');
     else if (enemy.getHp <= 0) {
       console.log(`You beated ${enemy.getName}`);
       gainXp(hero);

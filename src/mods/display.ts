@@ -6,5 +6,5 @@ export default function displayRound(floor : number, hero : Hero, ennemy : Enemy
   ennemy.displayInfo();
   hero.displayInfo();
   console.log('—————————————————— OPTION ——————————————————');
-  console.log('1 - Attack  \t 2 - Heal');
+  console.log('1 - Attack \t 2 - Heal \t 3 - Quit');
 }
