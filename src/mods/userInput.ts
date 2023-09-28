@@ -1,6 +1,6 @@
 const rl = require('readline-sync');
 
-export function getUserInput() {
+export default function getUserInput() {
   let userChoice = '';
   do {
     userChoice = rl.question('What to do ?\n');
@@ -13,6 +13,6 @@ export function getUserInput() {
   return 0;
 }
 
-export function waitUserInput() {
-  rl.question()
-}
+// export function waitUserInput() {
+//   rl.question()
+// }

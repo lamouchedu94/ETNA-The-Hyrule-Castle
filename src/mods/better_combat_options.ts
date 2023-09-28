@@ -1,6 +1,6 @@
 import Hero from './Hero';
 import Enemy from './Enemy';
-import getUserInput from './userinput';
+import getUserInput from './userInput';
 
 function heroAction(hero : Hero, enemy : Enemy, userChoice: number) {
   switch (userChoice) {
