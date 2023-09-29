@@ -5,6 +5,7 @@ import * as fs from 'fs'
 import { Item } from './objects';
 
 export default class Hero extends Character {
+
   private coins: number;
 
   private lvl: number;
@@ -33,7 +34,10 @@ export default class Hero extends Character {
       this.inventory.push(item)
     }
   }
-
+  public getCoins(): number {
+    return this.coins;
+  }
+  
   public get getName(): string {
     return `\x1b[32m${this.name.toUpperCase()}\x1b[0m`;
   }
@@ -146,4 +150,13 @@ export default class Hero extends Character {
       }
     }
   }
+
+  public subtractCoins(amount: number): number {
+    if (this.coins >= amount) {
+      this.coins -= amount;
+    }
+    return this.coins; // Retourne la nouvelle valeur des pièces
+  }
 }
+
+
