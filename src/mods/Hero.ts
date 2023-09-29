@@ -123,7 +123,7 @@ export default class Hero extends Character {
         item.number += 1
       }  
     }
-    //console.log(this.inventory[0])
+    console.log(`${this.name.toLocaleUpperCase()} obtain one ${this.getItemName(idItem)} !`)
 
   }
 
