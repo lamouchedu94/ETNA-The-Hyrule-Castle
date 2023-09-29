@@ -1,5 +1,4 @@
 import { readFileSync } from 'fs';
-
 const pathCharacters = './json/players.json';
 const pathEnemies = './json/enemies.json';
 const pathBosses = './json/boss.json';
@@ -31,5 +30,16 @@ export function getBosses() {
     return bossJson;
   } catch {
     throw new Error(`Cannot access file : ${pathBosses}`);
+  }
+}
+
+export function getItemName(id : number) : void {
+  //Return name of Item by id
+  const file = readFileSync('./json/potions.json', 'utf-8')
+  const fileContent = JSON.parse(file)
+  for (const item of fileContent) {
+    if (item.id === id) {
+      return item.name
+    }
   }
 }

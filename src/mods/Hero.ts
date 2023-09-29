@@ -3,6 +3,7 @@ import CharacterInterface from './CharacterInterface';
 import { makeBar } from './hpBar';
 import * as fs from 'fs'
 import { Item } from './objects';
+import { getItemName } from './jsonUtilities';
 
 export default class Hero extends Character {
   private coins: number;
@@ -55,7 +56,7 @@ export default class Hero extends Character {
     console.log("you actually have :")
     for (const elem of this.inventory) {
       if (elem.number > 0){
-        console.log(`${this.getItemName(elem.id)} (x${elem.number})`)
+        console.log(`${getItemName(elem.id)} (x${elem.number})`)
         rien = true
       }
       
@@ -123,7 +124,7 @@ export default class Hero extends Character {
         item.number += 1
       }  
     }
-    console.log(`${this.name.toLocaleUpperCase()} obtain one ${this.getItemName(idItem)} !`)
+    console.log(`${this.name.toLocaleUpperCase()} obtain one ${getItemName(idItem)} !`)
 
   }
 
@@ -136,14 +137,4 @@ export default class Hero extends Character {
     return 0
   }
 
-  public getItemName(id : number) : void {
-    //Return name of Item by id
-    const file = fs.readFileSync('./json/potions.json', 'utf-8')
-    const fileContent = JSON.parse(file)
-    for (const item of fileContent) {
-      if (item.id === id) {
-        return item.name
-      }
-    }
-  }
 }
