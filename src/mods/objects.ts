@@ -23,5 +23,3 @@ export function dropItem() {
     }
     return 3
 }
-  
-(dropItem())
