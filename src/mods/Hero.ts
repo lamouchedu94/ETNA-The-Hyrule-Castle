@@ -35,6 +35,26 @@ export default class Hero extends Character {
     }
   }
 
+  public setMaxHp(maxHp : number) {
+    this.maxHp = maxHp
+  }
+
+  public setCoins(coins : number) {
+    this.coins = coins
+  }
+
+  public setXp(xp : number) {
+    this.xp = xp
+  }
+
+  public setLvl(lvl : number) {
+    this.lvl = lvl
+  }
+
+  public setXpToLvlUp(xpToLvlUp : number){
+    this.xpToLvlUp = xpToLvlUp
+  }
+
   public get getName(): string {
     return `\x1b[32m${this.name.toUpperCase()}\x1b[0m`;
   }
