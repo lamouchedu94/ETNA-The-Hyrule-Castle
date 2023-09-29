@@ -1,0 +1,56 @@
+[
+    {
+        "name": "Young Link",
+        "def": 5,
+        "int": 6,
+        "hp": 36,
+        "maxHp": 40,
+        "race": 6,
+        "res": 5,
+        "spd": 12,
+        "str": 8,
+        "mp": 30,
+        "luck": 25,
+        "class": 1,
+        "rarity": 2,
+        "coins": 12,
+        "xp": 0,
+        "lvl": 1,
+        "xpToLvlUp": 30,
+        "inventory": [
+            {
+                "id": 1,
+                "name": "heal potion",
+                "number": 0,
+                "rarity": 1
+            },
+            {
+                "id": 2,
+                "name": "strength potion",
+                "number": 0,
+                "rarity": 1
+            },
+            {
+                "id": 3,
+                "name": "xp potion",
+                "number": 0,
+                "rarity": 3
+            }
+        ]
+    },
+    {
+        "name": "Dead Hand",
+        "def": 2,
+        "int": 3,
+        "hp": 33,
+        "maxHp": 40,
+        "race": 15,
+        "res": 2,
+        "spd": 8,
+        "str": 5,
+        "mp": 20,
+        "luck": 5,
+        "class": 5,
+        "rarity": 3
+    }
+]

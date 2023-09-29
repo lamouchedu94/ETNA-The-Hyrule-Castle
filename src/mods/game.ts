@@ -43,7 +43,7 @@ export default function startGame(game : GameSettings) {
     };
     if (repUtil === 5){
       displayMenu();
-      menu(getUserInput())
+      menu(getUserInput(), hero, enemy)
     };
     
     if (hero.getHp <= 0) console.log('\x1b[31mYOU LOST\x1b[0m');
