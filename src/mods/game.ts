@@ -44,7 +44,7 @@ export default function startGame(game : GameSettings) {
       menu(getUserInput())
     };
     
-    if (hero.getHp <= 0) console.log('\x1b[31mYOU LOST\x1b[             0m');
+    if (hero.getHp <= 0) console.log('\x1b[31mYOU LOST\x1b[0m');
     else if (enemy.getHp <= 0) {
       console.log(`You beated ${enemy.getName}`);
       gainXp(hero);
