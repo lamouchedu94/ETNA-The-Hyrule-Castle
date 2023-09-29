@@ -78,9 +78,7 @@ function purchaseItem(itemIndex: number) {
   const itemPrice: number | undefined = selectedItem?.price;
   
   if (playerCoins !== undefined && itemPrice !== undefined && playerCoins >= itemPrice && selectedItem.stock > 0) {
-    // Réduisez le stock de l'article.
     selectedItem.stock -= 1;
-    // Votre code lorsque le joueur a suffisamment de pièces.
     hero.subtractCoins(itemPrice);
     hero.addItem(selectedItem.id);
     console.log(`You have purchased ${selectedItem.name} !`);
@@ -96,18 +94,17 @@ function purchaseItem(itemIndex: number) {
 function handleMenuChoice(choice: number) {
   switch (choice) {
     case 1:
-      // Implémentez d'autres options de menu si nécessaire.
       break;
     case 2:
       displayShop();
       const shopChoice = getUserInput();
       if (shopChoice === 1) {
-        // Le joueur choisit de quitter le magasin.
+        // Le joueur choisit de quitter le magasin
       } else if (shopChoice === 2) {
-        // Le joueur choisit d'acheter un article.
+        // Le joueur choisit d'acheter un article
         const shopItemChoice = getUserInput();
         if (shopItemChoice === 0) {
-          // Le joueur choisit de quitter le magasin.
+          // Le joueur choisit de quitter le magasin
         } else if (shopItemChoice >= 1 && shopItemChoice <= shopInventory.length) {
           purchaseItem(shopItemChoice - 1);
         } else {
