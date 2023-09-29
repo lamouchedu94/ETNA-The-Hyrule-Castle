@@ -2,11 +2,13 @@
     {
         "id": 1,
         "name": "heal potion",
-        "number": 0
+        "number": 0,
+        "rarity": 1
     },
     {
         "id": 2,
         "name": "strength potion",
-        "number": 0
+        "number": 0,
+        "rarity": 1
     }
 ]

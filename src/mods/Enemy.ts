@@ -1,6 +1,6 @@
 import Character from './Character';
 import CharacterInterface from './CharacterInterface';
-import { makeBar } from './game';
+import { makeBar } from './hpBar';
 
 
 // export interface EnemieInterface {

@@ -2,12 +2,7 @@ import Character from './Character';
 import CharacterInterface from './CharacterInterface';
 import { makeBar } from './hpBar';
 import * as fs from 'fs'
-
-interface Inventory {
-  id: number,
-  name: string,
-  number: number,
-}
+import { Item } from './objects';
 
 export default class Hero extends Character {
   private coins: number;
@@ -18,7 +13,7 @@ export default class Hero extends Character {
 
   private xpToLvlUp: number;
 
-  private inventory: Inventory[]  
+  private inventory: Item[]  
 
   constructor(character : CharacterInterface, coins : number) {
     super(character);
@@ -56,7 +51,7 @@ export default class Hero extends Character {
   }
 
   public displayInventory() : void {
-    let rien = false
+    let rien = false  // si on a rien dans l'inventaire
     console.log("you actually have :")
     for (const elem of this.inventory) {
       if (elem.number > 0){

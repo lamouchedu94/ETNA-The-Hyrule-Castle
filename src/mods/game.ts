@@ -1,6 +1,5 @@
 import Hero from './Hero';
 import Enemy from './Enemy';
-
 import GameSettings from './GameSettings';
 import { getBosses, getCharacters, getEnemies } from './jsonUtilities';
 import { createEnemy, createHero } from './createCharacter';
@@ -10,6 +9,7 @@ import gainXp from './lvl_exp';
 import fight from './better_combat_options';
 import getUserInput from './userInput';
 import menu from  './menu'
+import { dropItem } from './objects';
 
 const rl = require('readline-sync');
 
@@ -51,7 +51,7 @@ export default function startGame(game : GameSettings) {
       fightIsOver = true;
       floor += 1;
       hero.addCoins(1);
-      hero.addItem(1);
+      hero.addItem(dropItem())
     }
     rl.question('Press enter to continue');
   }
