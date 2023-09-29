@@ -9,27 +9,10 @@ import { displayMenu } from './display';
 import gainXp from './lvl_exp';
 import fight from './better_combat_options';
 import getUserInput from './userInput';
+import menu from  './menu'
 
 const rl = require('readline-sync');
 
-export function makeBar(currentHp: number, maxHp: number) {
-
-  let hpBar: string = "\x1B[0m[";
-  for (let i = 0; i < currentHp; i += 1) {
-      if (i < maxHp / 6) {
-          hpBar += "\x1B[31m|\x1B[0m";
-      } else if (i < (maxHp / 4) * 2) {
-          hpBar += '\x1B[33m|\x1B[0m';
-      } else {
-          hpBar += '\x1B[32m|\x1B[0m';
-      }
-  }
-  for (let i = 0; i < maxHp - currentHp; i += 1) {
-      hpBar += "—";
-  }
-  return hpBar + "]";
-  
-}
 export default function startGame(game : GameSettings) {
   let fightIsOver : boolean = true;
   let floor = 1;
@@ -74,11 +57,3 @@ export default function startGame(game : GameSettings) {
   }
 }
 
-export function menu(userInput : number) {
-  if (userInput === 5) {
-    console.log(`\nSee you later !`)     
-    process.exit(1)
-  } else {
-    console.log("not implemented yep. wip")
-  }
-}
