@@ -33,6 +33,7 @@ export default function startGame(game : GameSettings, save : boolean) {
     hero.setXp(playerArray[0].xp)
     hero.setLvl(playerArray[0].lvl)
     hero.setXpToLvlUp(playerArray[0].xpToLvlUp)
+    hero.setInventory(playerArray[0].inventory)
 
 //    getUserInput()
     

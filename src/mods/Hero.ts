@@ -55,6 +55,10 @@ export default class Hero extends Character {
     this.xpToLvlUp = xpToLvlUp
   }
 
+  public setInventory(inventory : Item[]) {
+    this.inventory = inventory
+  }
+
   public get getName(): string {
     return `\x1b[32m${this.name.toUpperCase()}\x1b[0m`;
   }
