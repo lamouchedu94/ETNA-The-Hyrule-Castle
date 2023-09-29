@@ -1,23 +1,22 @@
 [
     {
-        "id": 1,
         "name": "Link",
-        "hp": 100,
-        "mp": 30,
-        "str": 20,
-        "int": 7,
         "def": 8,
-        "res": 8,
-        "spd": 11,
-        "luck": 10,
+        "int": 7,
+        "hp": 49,
+        "maxHp": 65,
         "race": 1,
+        "res": 9,
+        "spd": 11,
+        "str": 15,
+        "mp": 30,
+        "luck": 10,
         "class": 1,
-        "maxHp": 100,
         "rarity": 1,
-        "coins": 14,
-        "xp": 7,
-        "lvl": 5,
-        "xpToLvlUp": 31,
+        "coins": 15,
+        "xp": 23,
+        "lvl": 3,
+        "xpToLvlUp": 33,
         "inventory": [
             {
                 "id": 1,
@@ -34,24 +33,24 @@
             {
                 "id": 3,
                 "name": "xp potion",
-                "number": 0,
+                "number": 1,
                 "rarity": 3
             }
         ]
     },
     {
-        "name": "Lizalfos",
-        "def": 2,
+        "name": "Skulltula",
+        "def": 4,
         "int": 5,
-        "hp": 40,
-        "maxHp": 40,
-        "race": 12,
+        "hp": 20,
+        "maxHp": 20,
+        "race": 16,
         "res": 1,
         "spd": 6,
-        "str": 10,
+        "str": 12,
         "mp": 20,
         "luck": 5,
         "class": 5,
-        "rarity": 2
+        "rarity": 1
     }
 ]

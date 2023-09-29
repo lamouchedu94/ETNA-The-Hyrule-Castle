@@ -28,6 +28,14 @@ export default function startGame(game : GameSettings, save : boolean) {
   if (save) {
     playerArray = getCharacters(save);
     hero = selectHero(playerArray, 1)
+    hero.setMaxHp(playerArray[0].maxHp)
+    hero.setCoins(playerArray[0].coin)
+    hero.setXp(playerArray[0].xp)
+    hero.setLvl(playerArray[0].lvl)
+    hero.setXpToLvlUp(playerArray[0].xpToLvlUp)
+
+//    getUserInput()
+    
   }
   //console.log(playerArray[0])
   //getUserInput()
