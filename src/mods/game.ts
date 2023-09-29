@@ -10,6 +10,8 @@ import fight from './better_combat_options';
 import getUserInput from './userInput';
 import menu from  './menu'
 import { dropItem } from './objects';
+import * as fs from 'fs'
+
 
 const rl = require('readline-sync');
 
