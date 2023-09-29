@@ -55,7 +55,7 @@ export default class Hero extends Character {
     console.log("you actually have :")
     for (const elem of this.inventory) {
       if (elem.number > 0){
-        console.log(`${this.getItemName(elem.id)} (x${elem.number})`)
+        console.log(`${this.getItem(elem.id).name} (x${elem.number})`)
         rien = true
       }
       
@@ -123,7 +123,7 @@ export default class Hero extends Character {
         item.number += 1
       }  
     }
-    console.log(`${this.name.toLocaleUpperCase()} obtain one ${this.getItemName(idItem)} !`)
+    console.log(`${this.name.toLocaleUpperCase()} obtain one ${this.getItem(idItem).name} !`)
 
   }
 
@@ -136,13 +136,13 @@ export default class Hero extends Character {
     return 0
   }
 
-  public getItemName(id : number) : void {
+  public getItem(id : number) {
     //Return name of Item by id
     const file = fs.readFileSync('./json/potions.json', 'utf-8')
     const fileContent = JSON.parse(file)
     for (const item of fileContent) {
       if (item.id === id) {
-        return item.name
+        return item
       }
     }
   }
