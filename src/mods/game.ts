@@ -11,14 +11,16 @@ import getUserInput from './userInput';
 import menu from  './menu'
 import { dropItem } from './objects';
 import * as fs from 'fs'
+import Character from './Character';
 
 
 const rl = require('readline-sync');
 
-export default function startGame(game : GameSettings) {
+export default function startGame(game : GameSettings, save : boolean) {
   let fightIsOver : boolean = true;
   let floor = 1;
-  const playerArray = getCharacters();
+  const playerArray = getCharacters(save);
+  
   const ennemyArray = getEnemies();
   const bossArray = getBosses();
   const hero : Hero = createHero(playerArray);

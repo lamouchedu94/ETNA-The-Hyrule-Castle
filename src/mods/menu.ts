@@ -16,6 +16,6 @@ export default function menu(userInput : number, hero : Character, enemy : Chara
     process.exit(1)
   }
   else {
-    console.log("not implemented yep. wip")
+    //console.log("not implemented yep. wip")
   }
 }

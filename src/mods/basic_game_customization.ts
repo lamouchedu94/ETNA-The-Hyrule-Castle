@@ -57,13 +57,13 @@ export default function startGame() {
   if (userInput === 1) {
     const difficulty = selectDifficulty();
     const round = selectRoundsNumber();
-    return new GameSettings(difficulty, round);
+    return [new GameSettings(difficulty, round), 0];
   } 
   if (userInput === 2) {
-    console.log("Save not implemented yet. Wip")
-  }
-  if (userInput === 4) {
-    console.log()
+    //console.log("Save not implemented yet. Wip")
+    const difficulty = selectDifficulty();
+    const round = selectRoundsNumber();
+    return [new GameSettings(difficulty, round), 1]
   }
   return null;
 }

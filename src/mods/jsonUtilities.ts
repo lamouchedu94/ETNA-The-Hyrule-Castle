@@ -2,12 +2,19 @@ import { readFileSync } from 'fs';
 const pathCharacters = './json/players.json';
 const pathEnemies = './json/enemies.json';
 const pathBosses = './json/boss.json';
+const pathSave = './json/save.json'
 
-export function getCharacters() {
+export function getCharacters(save : boolean) {
   try {
-    const file = readFileSync(pathCharacters, 'utf-8');
-    const characterJson = JSON.parse(file);
-    return characterJson;
+    if (save) {
+      const file = readFileSync(pathSave, 'utf-8');
+      const characterJson = JSON.parse(file);
+      return characterJson;
+    } else {
+      const file = readFileSync(pathCharacters, 'utf-8');
+      const characterJson = JSON.parse(file);
+      return characterJson[0];
+    }
   } catch {
     throw new Error(`Cannot access file : ${pathCharacters}`);
   }

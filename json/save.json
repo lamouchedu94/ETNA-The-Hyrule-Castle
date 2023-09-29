@@ -1,33 +1,33 @@
 [
     {
-        "name": "Young Link",
-        "def": 5,
-        "int": 6,
-        "hp": 36,
-        "maxHp": 40,
-        "race": 6,
-        "res": 5,
-        "spd": 12,
-        "str": 8,
+        "name": "Link",
+        "hp": 43,
         "mp": 30,
-        "luck": 25,
+        "str": 15,
+        "int": 7,
+        "def": 8,
+        "res": 8,
+        "spd": 11,
+        "luck": 10,
+        "race": 1,
         "class": 1,
-        "rarity": 2,
-        "coins": 12,
-        "xp": 0,
-        "lvl": 1,
-        "xpToLvlUp": 30,
+        "maxHp": 65,
+        "rarity": 1,
+        "coins": 14,
+        "xp": 7,
+        "lvl": 2,
+        "xpToLvlUp": 31,
         "inventory": [
             {
                 "id": 1,
                 "name": "heal potion",
-                "number": 0,
+                "number": 1,
                 "rarity": 1
             },
             {
                 "id": 2,
                 "name": "strength potion",
-                "number": 0,
+                "number": 1,
                 "rarity": 1
             },
             {
@@ -39,18 +39,18 @@
         ]
     },
     {
-        "name": "Dead Hand",
+        "name": "Lizalfos",
         "def": 2,
-        "int": 3,
-        "hp": 33,
+        "int": 5,
+        "hp": 40,
         "maxHp": 40,
-        "race": 15,
-        "res": 2,
-        "spd": 8,
-        "str": 5,
+        "race": 12,
+        "res": 1,
+        "spd": 6,
+        "str": 10,
         "mp": 20,
         "luck": 5,
         "class": 5,
-        "rarity": 3
+        "rarity": 2
     }
 ]
