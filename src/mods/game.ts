@@ -1,7 +1,7 @@
 import Hero from './Hero';
 import Enemy from './Enemy';
 import GameSettings from './GameSettings';
-import { getBosses, getCharacters, getEnemies, getSavedCharacters } from './jsonUtilities';
+import { getBosses, getCharacters, getEnemies} from './jsonUtilities';
 import { createEnemy, createHero } from './createCharacter';
 import { displayRound } from './display';
 import { displayMenu } from './display';
@@ -21,33 +21,30 @@ const rl = require('readline-sync');
 export default function startGame(game : GameSettings, save : boolean) {
   let fightIsOver : boolean = true;
   let floor = 1;
-  //console.log(getSavedCharacters())
-  //getUserInput()
   let playerArray : CharacterInterface[]
   let hero : any
+  let enemy : any
   if (save) {
+    //initialise character if save are loaded
+    enemy = getEnemies(save)
     playerArray = getCharacters(save);
-    hero = selectHero(playerArray, 1)
+    hero = selectHero(playerArray, playerArray[0].rarity)
     hero.setMaxHp(playerArray[0].maxHp)
     hero.setCoins(playerArray[0].coin)
     hero.setXp(playerArray[0].xp)
     hero.setLvl(playerArray[0].lvl)
     hero.setXpToLvlUp(playerArray[0].xpToLvlUp)
     hero.setInventory(playerArray[0].inventory)
-
-//    getUserInput()
     
   }
-  //console.log(playerArray[0])
-  //getUserInput()
   if (!save) {
     playerArray = getCharacters(save);
     hero = createHero(playerArray);
     
   }
-  const ennemyArray = getEnemies();
+  const ennemyArray = getEnemies(save);
   const bossArray = getBosses();
-  let enemy : Enemy = createEnemy(ennemyArray, game.getDifficulty);
+  enemy = createEnemy(ennemyArray, game.getDifficulty);
 
   while (floor <= game.getRound && hero.getHp > 0) {
     console.clear();

@@ -24,16 +24,15 @@ export function getCharacters(save : boolean) {
   }
 }
 
-export function getSavedCharacters() {
-  const file = readFileSync(pathSave, 'utf-8');
-  const characterJson = JSON.parse(file);
-  for (const elem of characterJson) {
-    console.log(elem, 1)
-  }
-}
-
-export function getEnemies() {
+export function getEnemies(save : boolean) {
   try {
+    if (save) {
+      let tab = []
+      const file = readFileSync(pathSave, 'utf-8');
+      const enemiesJson = JSON.parse(file);
+      tab.push(enemiesJson[1])
+      return enemiesJson;
+    }
     const file = readFileSync(pathEnemies, 'utf-8');
     const enemiesJson = JSON.parse(file);
     return enemiesJson;
