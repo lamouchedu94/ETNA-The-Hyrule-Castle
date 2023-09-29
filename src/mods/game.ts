@@ -12,8 +12,8 @@ import { dropItem } from './objects';
 const rl = require('readline-sync');
 
 const shopInventory = [
-  { id: 1, name: "Heal potion", price: 10 },
-  { id: 2, name: "Sword (made in china)", price: 5 },
+  { id: 1, name: "Heal potion", price: 10, stock: 2},
+  { id: 2, name: "Sword (made in china)", price: 1, stock: 2 },
 ];
 
 let hero: Hero;
@@ -68,7 +68,7 @@ function displayShop() {
   console.log(`Hero's coins: ${hero.getCoins()} Ɍ\n`);
 
   shopInventory.forEach((item, index) => {
-    console.log(`${index + 1}. ${item.name} - ${item.price} Ɍ`);
+    console.log(`${index + 1}. ${item.name} (x${item.stock}) - ${item.price} Ɍ `);
   });
 }
 
@@ -77,12 +77,16 @@ function purchaseItem(itemIndex: number) {
   const playerCoins: number | undefined = hero.getCoins();
   const itemPrice: number | undefined = selectedItem?.price;
   
-  if (playerCoins !== undefined && itemPrice !== undefined && playerCoins >= itemPrice) {
+  if (playerCoins !== undefined && itemPrice !== undefined && playerCoins >= itemPrice && selectedItem.stock > 0) {
+    // Réduisez le stock de l'article.
+    selectedItem.stock -= 1;
     // Votre code lorsque le joueur a suffisamment de pièces.
     hero.subtractCoins(itemPrice);
     hero.addItem(selectedItem.id);
     console.log(`You have purchased ${selectedItem.name} !`);
     console.log(`Remaining currency: ${hero.getCoins()} Ɍ\n`);
+  } else if (selectedItem.stock === 0) {
+    console.log(`Sorry, ${selectedItem.name} is out of stock.`);
   } else {
     console.log("Insufficient funds or item not found.");
   }
