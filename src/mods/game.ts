@@ -19,14 +19,14 @@ const pathObj = "./json/object.json";
 const shopInventory: any = readFileSync(pathObj, 'utf-8'); // Read the contents of './json/object.json' and store it in 'shopInventory'.
 const stock = JSON.parse(shopInventory); // Parse 'shopInventory' to JSON and store it in 'stock'.
 
-export default function startGame(game: GameSettings) { // Export a function named 'startGame' with a parameter 'game' of type GameSettings.
-  let fightIsOver: boolean = true; // Declare a boolean variable 'fightIsOver' and initialize it to true.
+export default function startGame(game: GameSettings) { 
+  let fightIsOver: boolean = true; 
   let floor = 1; 
-  const playerArray = getCharacters(); // Get an array of player characters using 'getCharacters' function.
-  const enemyArray = getEnemies(); // Get an array of enemy characters using 'getEnemies' function.
-  const bossArray = getBosses(); // Get an array of boss characters using 'getBosses' function.
-  hero = createHero(playerArray); // Create a hero character using 'createHero' function.
-  let enemy: Enemy = createEnemy(enemyArray, game.getDifficulty); // Create an enemy character using 'createEnemy' function with the specified difficulty.
+  const playerArray = getCharacters();
+  const enemyArray = getEnemies();
+  const bossArray = getBosses(); 
+  hero = createHero(playerArray); 
+  let enemy: Enemy = createEnemy(enemyArray, game.getDifficulty); 
 
   // While the hero is alive and the floor is less than the maximum number of rounds, keep fighting.
   while (floor <= game.getRound && hero.getHp > 0) {
@@ -73,11 +73,9 @@ export default function startGame(game: GameSettings) { // Export a function nam
       rl.question('Press enter to continue'); 
   }
   if (hero.getHp > 0) {
-    console.log("👌✨Vous vous etes super !✨👌"); // Display a message if the hero is still alive.
-  }
+    console.log("👌You're alive !✨👌"); 
 }
 
-// This function displays the shop menu.
 function displayShop() {
   console.log("---------------------------------------------------------");
   console.log("|             ✨Welcome to the Rup'shop✨               |"); 
@@ -98,12 +96,12 @@ function purchaseItem(itemIndex: number) {
     selectedItem.stock -= 1; // Decrement the item's stock.
     hero.subtractCoins(itemPrice); // Subtract the item's price from the hero's coins.
     hero.addItem(selectedItem.id); // Add the purchased item to the hero's inventory.
-    console.log(`You have purchased ${selectedItem.name} !`); // Display a purchase confirmation message.
-    console.log(`Remaining currency: ${hero.getCoins()} Ɍ\n`); // Display the remaining hero's coins.
+    console.log(`You have purchased ${selectedItem.name} !`); 
+    console.log(`Remaining currency: ${hero.getCoins()} Ɍ\n`); 
   } else if (selectedItem.stock === 0) {
-    console.log(`Sorry Man, ${selectedItem.name} is out of stock.`); // Display a message if the item is out of stock.
+    console.log(`Sorry Man, ${selectedItem.name} is out of stock.`); 
   } else {
-    console.log("Insufficient funds or item not found."); // Display a message for insufficient funds or invalid item.
+    console.log("Insufficient funds or item not found.");
   }
 }
 
@@ -112,14 +110,15 @@ function handleMenuChoice(choice: number) {
     case 1:
       break;
     case 2:
-      displayShop(); // Display the shop menu if the user's choice is 2.
+      displayShop();
       const shopItemChoice = getUserInput();
       if (shopItemChoice === 0) {
         // The player chooses to leave the shop.
       } else if (shopItemChoice >= 1 && shopItemChoice <= stock.length) {
         purchaseItem(shopItemChoice - 1); // Purchase the selected item from the shop.
       } else {
-        console.log("Nop dude, invalid selection."); // Display an invalid selection message.
+        console.log("Nop dude, invalid selection."); 
       }
   }
+}
 }
