@@ -1,8 +1,6 @@
-import Hero from './Hero';
-import Enemy from './Enemy';
 import GameSettings from './GameSettings';
-import { getBosses, getCharacters, getEnemies } from './jsonUtilities';
-import { createEnemy, createHero } from './createCharacter';
+import { getBosses, getCharacters, getEnemies, getSavedGameSetting} from './jsonUtilities';
+import { createEnemy, createHero, selectEnemy } from './createCharacter';
 import { displayRound } from './display';
 import { displayMenu } from './display';
 import gainXp from './lvl_exp';
@@ -10,18 +8,54 @@ import fight from './better_combat_options';
 import getUserInput from './userInput';
 import menu from  './menu'
 import { dropItem } from './objects';
+import * as fs from 'fs'
+import { selectHero } from './createCharacter';
+import CharacterInterface from './CharacterInterface';
+
 
 const rl = require('readline-sync');
 
-export default function startGame(game : GameSettings) {
+export default function startGame(game : GameSettings, save : boolean) {
   let fightIsOver : boolean = true;
   let floor = 1;
-  const playerArray = getCharacters();
-  const ennemyArray = getEnemies();
-  const bossArray = getBosses();
-  const hero : Hero = createHero(playerArray);
-  let enemy : Enemy = createEnemy(ennemyArray, game.getDifficulty);
+  let playerArray : CharacterInterface[]
+  let ennemyArray : CharacterInterface[]
+  let hero : any
+  let enemy : any
+  if (save) {
+    let temp = getSavedGameSetting()
+    //let game : GameSettings
+    game.setDifficulty(temp.difficulty)
+    game.setRound(temp.round)
+    game.setFloor(temp.floor)
+    floor = game.getFloor
+    //console.log(temp, game)
+    //getUserInput()
+    
+    ennemyArray = getEnemies(save)
+    enemy = selectEnemy(ennemyArray, ennemyArray[0].rarity, game.getDifficulty)
+    enemy.setMaxHp(ennemyArray[0].maxHp)
+    //console.log(enemy)
 
+
+    playerArray = getCharacters(save);
+    hero = selectHero(playerArray, playerArray[0].rarity)
+    hero.setMaxHp(playerArray[0].maxHp)
+    hero.setCoins(playerArray[0].coin)
+    hero.setXp(playerArray[0].xp)
+    hero.setLvl(playerArray[0].lvl)
+    hero.setXpToLvlUp(playerArray[0].xpToLvlUp)
+    hero.setInventory(playerArray[0].inventory)
+    fightIsOver = false
+    
+  } else {
+    playerArray = getCharacters(save);
+    hero = createHero(playerArray);   
+    ennemyArray = getEnemies(save);
+    enemy = createEnemy(ennemyArray, game.getDifficulty);
+
+  }
+  const bossArray = getBosses();
   while (floor <= game.getRound && hero.getHp > 0) {
     console.clear();
     if (fightIsOver) {
@@ -30,6 +64,7 @@ export default function startGame(game : GameSettings) {
       console.log(`New enemy appear : ${enemy.getName} ${enemy.getHp}`);
       fightIsOver = false;
     }
+    
     displayRound(floor, hero, enemy);   
     const repUtil = fight(hero, enemy)
     if (repUtil === 3) {
@@ -41,7 +76,7 @@ export default function startGame(game : GameSettings) {
     };
     if (repUtil === 5){
       displayMenu();
-      menu(getUserInput())
+      menu(getUserInput(), hero, enemy, game)
     };
     
     if (hero.getHp <= 0) console.log('\x1b[31mYOU LOST\x1b[0m');
@@ -49,6 +84,7 @@ export default function startGame(game : GameSettings) {
       console.log(`You beated ${enemy.getName}`);
       gainXp(hero);
       fightIsOver = true;
+      game.setFloor(floor+1)
       floor += 1;
       hero.addCoins(1);
       hero.addItem(dropItem())

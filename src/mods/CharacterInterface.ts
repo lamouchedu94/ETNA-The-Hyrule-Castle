@@ -1,3 +1,5 @@
+import { Item } from "./objects";
+
 export default interface CharacterInterface {
   id? : number,
   name : string,
@@ -11,5 +13,11 @@ export default interface CharacterInterface {
   luck : number,
   race : number,
   class : number,
-  rarity : number
+  rarity : number,
+  maxHp? : number,
+  coin? : number,
+  xp?: number,
+  lvl?: number,
+  xpToLvlUp?: number,
+  inventory? : Item[]
 }

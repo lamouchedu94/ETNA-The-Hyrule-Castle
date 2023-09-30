@@ -3,6 +3,7 @@ import CharacterInterface from './CharacterInterface';
 import { makeBar } from './hpBar';
 import * as fs from 'fs'
 import { Item } from './objects';
+import { getItemName } from './jsonUtilities';
 
 export default class Hero extends Character {
   private coins: number;
@@ -32,6 +33,30 @@ export default class Hero extends Character {
     for (const item of fileContent) {
       this.inventory.push(item)
     }
+  }
+
+  public setMaxHp(maxHp : number) {
+    this.maxHp = maxHp
+  }
+
+  public setCoins(coins : number) {
+    this.coins = coins
+  }
+
+  public setXp(xp : number) {
+    this.xp = xp
+  }
+
+  public setLvl(lvl : number) {
+    this.lvl = lvl
+  }
+
+  public setXpToLvlUp(xpToLvlUp : number){
+    this.xpToLvlUp = xpToLvlUp
+  }
+
+  public setInventory(inventory : Item[]) {
+    this.inventory = inventory
   }
 
   public get getName(): string {
