@@ -31,11 +31,12 @@ export function getEnemies(save : boolean) {
       const file = readFileSync(pathSave, 'utf-8');
       const enemiesJson = JSON.parse(file);
       tab.push(enemiesJson[1])
+      return tab;
+    } else {
+      const file = readFileSync(pathEnemies, 'utf-8');
+      const enemiesJson = JSON.parse(file);
       return enemiesJson;
     }
-    const file = readFileSync(pathEnemies, 'utf-8');
-    const enemiesJson = JSON.parse(file);
-    return enemiesJson;
   } catch {
     throw new Error(`Cannot access file : ${pathEnemies}`);
   }
