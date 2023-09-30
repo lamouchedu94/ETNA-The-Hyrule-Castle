@@ -3,6 +3,8 @@ import CharacterInterface from './CharacterInterface';
 import { makeBar } from './hpBar';
 import * as fs from 'fs'
 import { Item } from './objects';
+const rl = require('readline-sync');
+
 
 export default class Hero extends Character {
 
@@ -54,20 +56,38 @@ export default class Hero extends Character {
     console.log(`Rupees : ${this.coins}`);
   }
 
-  public displayInventory() : void {
-    let rien = false  // si on a rien dans l'inventaire
-    console.log("you actually have :")
+  public displayInventory(): void {
+    let rien = false;
+    let userChoice = '';
+    console.log('You actually have:');
     for (const elem of this.inventory) {
-      if (elem.number > 0){
-        console.log(`${this.getItemName(elem.id)} (x${elem.number})`)
-        rien = true
+      if (elem.number > 0) {
+        console.log(`${this.getItem(elem.id).name} (x${elem.number})`);
+        rien = true;
       }
-      
     }
     if (!rien) {
-      console.log('Nothing in your inventory')  
+      console.log('Nothing in your inventory');
+    } else {
+      userChoice = rl.question('Which item do you want to use? \n ');
+      if (userChoice === '1') {
+        this.usingItem(1);
+      } else if (userChoice === '2') {
+        this.usingItem(2);
+      } else if (userChoice === '3') {
+        this.usingItem(3);
+      } else if (userChoice === '4') {
+        this.usingItem(4);
+      } else if (userChoice === '5') {
+        this.usingItem(5);
+      } else if (userChoice === '6') {
+        this.usingItem(6);
+      } else if (userChoice === '7') {
+        this.usingItem(7);
+      } else {
+        console.log('Invalid choice.');
+      }
     }
-    
   }
 
   public addCoins(coins: number): void {
@@ -127,7 +147,7 @@ export default class Hero extends Character {
         item.number += 1
       }  
     }
-    console.log(`${this.name.toLocaleUpperCase()} obtain one ${this.getItemName(idItem)} !`)
+    console.log(`${this.name.toUpperCase()} obtain one ${this.getItem(idItem)} !`)
 
   }
 
@@ -140,13 +160,13 @@ export default class Hero extends Character {
     return 0
   }
 
-  public getItemName(id : number) : void {
+  public getItem(id : number) {
     //Return name of Item by id
     const file = fs.readFileSync('./json/potions.json', 'utf-8')
     const fileContent = JSON.parse(file)
     for (const item of fileContent) {
       if (item.id === id) {
-        return item.name
+        return item
       }
     }
   }
@@ -157,6 +177,50 @@ export default class Hero extends Character {
     }
     return this.coins; // Retourne la nouvelle valeur des pièces
   }
+
+  public usingItem(id: number): void {
+    const item = this.getItem(id);
+    const numberOfItems = this.getNumberOfCurrentItem(id);
+    if (item && numberOfItems > 0) {
+      switch (item.id) {
+        case 1:
+          console.log("Max HP !!!")
+          this.setHp = this.maxHp
+          break;
+        case 2:
+          console.log(`${this.name.toUpperCase()} gaine 10 str`)
+          this.setStr = this.getStr + 10;
+          break;
+        case 3:
+          console.log(`${this.name.toUpperCase()} gaine ${Math.floor(15)} xp`)
+          this.xp += 15;
+          break;
+        case 4:
+          console.log(`${this.name.toUpperCase()} gaine 20 str`)
+          this.setStr = this.getStr + 20;
+          break;
+        case 5:
+          console.log(`${this.name.toUpperCase()} gaine 50 str`)
+          this.setStr = this.getStr + 50;
+          break;
+        case 6:
+          console.log(`${this.name.toUpperCase()} gaine 5 def`)
+          this.setDef = this.getDef + 5;
+          break;
+        case 7:
+          console.log(`${this.name.toUpperCase()} gaine 15 def`)
+          this.setDef = this.getDef + 15;
+          break;
+        default:
+          console.log('Unknown item');
+          break;
+      }
+  
+      this.inventory[this.inventory.findIndex((element) => element.id === id)].number -= 1;
+    } else {
+      console.log('You don\'t have this item in your inventory.');
+    }
+  }   
 }
 
 

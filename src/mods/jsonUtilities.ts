@@ -3,6 +3,7 @@ import { readFileSync } from 'fs';
 const pathCharacters = './json/players.json';
 const pathEnemies = './json/enemies.json';
 const pathBosses = './json/boss.json';
+const pathObj = "./json/object.json";
 
 export function getCharacters() {
   try {
@@ -31,5 +32,15 @@ export function getBosses() {
     return bossJson;
   } catch {
     throw new Error(`Cannot access file : ${pathBosses}`);
+  }
+}
+
+export function getObject() {
+  try{
+    const shopInventory = readFileSync(pathObj, 'utf-8');
+    const stock = JSON.parse(shopInventory);
+    return (stock)  ;
+  } catch{
+    throw new Error(`Cannot access file : ${pathObj}`);
   }
 }

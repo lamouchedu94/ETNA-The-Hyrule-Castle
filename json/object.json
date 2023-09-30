@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "name": "heal potion",
+        "stock": 2,
+        "rarity": 5,
+        "price": 10
+
+    },
+    {
+        "id": 2,
+        "name": "strength potion",
+        "stock": 2,
+        "rarity": 2,
+        "price": 7
+    },
+    {
+        "id": 3,
+        "name": "xp potion",
+        "stock": 5,
+        "rarity": 1,
+        "price": 3
+    }
+    ,
+    {
+        "id": 4,
+        "name": "Sword (made in china)",
+        "stock": 2,
+        "rarity": 3,
+        "price": 5
+    }
+    ,
+    {
+        "id": 5,
+        "name": "Super Swoooord",
+        "stock": 1,
+        "rarity": 3,
+        "price": 9
+    }
+    ,
+    {
+        "id": 6,
+        "name": "Paper Shield",
+        "stock": 2,
+        "rarity": 3,
+        "price": 8
+    }
+    ,
+    {
+        "id": 7,
+        "name": "Nice Shield",
+        "stock": 1,
+        "rarity": 3,
+        "price": 3
+    }
+]
