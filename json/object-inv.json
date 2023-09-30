@@ -1,0 +1,47 @@
+[
+    {
+        "id": 1,
+        "name": "1. Heal potion",
+        "number": 0,
+        "rarity": 1
+    },
+    {
+        "id": 2,
+        "name": "2. Strength potion",
+        "number": 0,
+        "rarity": 1
+    },
+    {
+        "id": 3,
+        "name": "3. Xp potion",
+        "number": 0,
+        "rarity": 3
+    },
+    {
+        "id": 4,
+        "name": "4. Sword (made in china)",
+        "number": 0,
+        "rarity": 3
+    }
+    ,
+    {
+        "id": 5,
+        "name": "5. Super Swoooord",
+        "number": 0,
+        "rarity": 3
+    }
+    ,
+    {
+        "id": 6,
+        "name": "6. Paper Shield",
+        "number": 0,
+        "rarity": 3
+    }
+    ,
+    {
+        "id": 7,
+        "name": "7. Nice Shield",
+        "number": 0,
+        "rarity": 3
+    }
+]

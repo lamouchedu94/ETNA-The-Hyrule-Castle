@@ -29,7 +29,7 @@ export default class Hero extends Character {
   }
 
   private initialiseInventory() {
-    const file = fs.readFileSync('./json/potions.json', 'utf-8')
+    const file = fs.readFileSync('./json/object-inv.json', 'utf-8')
     const fileContent = JSON.parse(file)
     console.log(fileContent)
     for (const item of fileContent) {
@@ -47,7 +47,6 @@ export default class Hero extends Character {
   public displayInfo() : void {
     let healthBar = '';
     console.log(`\x1b[32m${this.name.toUpperCase()}\x1b[0m (LVL ${this.lvl})`);
-    //for (let i = 0; i < this.hp; i += 1) healthBar += '\u2665 ';
     healthBar = makeBar(this.hp, this.getMaxHp)
     console.log(`\x1b[31m${healthBar}\x1b[0m`);
     console.log(`HP : ${this.hp}/${this.maxHp}`);
@@ -147,7 +146,6 @@ export default class Hero extends Character {
         item.number += 1
       }  
     }
-    console.log(`${this.name.toUpperCase()} obtain one ${this.getItem(idItem)} !`)
 
   }
 
@@ -162,7 +160,7 @@ export default class Hero extends Character {
 
   public getItem(id : number) {
     //Return name of Item by id
-    const file = fs.readFileSync('./json/potions.json', 'utf-8')
+    const file = fs.readFileSync('./json/object-inv.json', 'utf-8')
     const fileContent = JSON.parse(file)
     for (const item of fileContent) {
       if (item.id === id) {
@@ -175,7 +173,7 @@ export default class Hero extends Character {
     if (this.coins >= amount) {
       this.coins -= amount;
     }
-    return this.coins; // Retourne la nouvelle valeur des pièces
+    return this.coins; //returne new value coins
   }
 
   public usingItem(id: number): void {
@@ -222,5 +220,4 @@ export default class Hero extends Character {
     }
   }   
 }
-
 
