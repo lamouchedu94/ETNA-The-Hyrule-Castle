@@ -10,11 +10,16 @@ import { dropItem } from './objects';
 import * as fs from 'fs'
 import { selectHero } from './createCharacter';
 import CharacterInterface from './CharacterInterface';
+import Hero from './Hero';
 
 
 const rl = require('readline-sync');
+
 let hero: Hero;
 const pathObj = "./json/object.json";
+
+const shopInventory: any = fs.readFileSync(pathObj, 'utf-8'); // Read the contents of './json/object.json' and store it in 'shopInventory'
+const stock = JSON.parse(shopInventory); // Parse 'shopInventory' to JSON and store it in 'stock'
 
 export default function startGame(game : GameSettings, save : boolean) {
   let fightIsOver : boolean = true;
@@ -63,7 +68,7 @@ export default function startGame(game : GameSettings, save : boolean) {
     if (fightIsOver) {
       if (floor % 10 === 0) enemy = createEnemy(bossArray, game.getDifficulty); 
       // Create a boss enemy every 10th floor
-      else enemy = createEnemy(enemyArray, game.getDifficulty);
+      else enemy = createEnemy(ennemyArray, game.getDifficulty);
       console.log(`New enemy appears: ${enemy.getName} ${enemy.getHp}`); 
       fightIsOver = false; // Set 'fightIsOver' to false as a new fight has started
     }
