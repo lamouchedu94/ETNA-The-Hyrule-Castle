@@ -3,8 +3,7 @@ import CharacterInterface from './CharacterInterface';
 import { makeBar } from './hpBar';
 import * as fs from 'fs'
 import { Item } from './objects';
-const rl = require('readline-sync');
-
+import { getItemName } from './jsonUtilities';
 
 export default class Hero extends Character {
 
@@ -36,10 +35,31 @@ export default class Hero extends Character {
       this.inventory.push(item)
     }
   }
-  public getCoins(): number {
-    return this.coins;
+
+  public setMaxHp(maxHp : number) {
+    this.maxHp = maxHp
   }
-  
+
+  public setCoins(coins : number) {
+    this.coins = coins
+  }
+
+  public setXp(xp : number) {
+    this.xp = xp
+  }
+
+  public setLvl(lvl : number) {
+    this.lvl = lvl
+  }
+
+  public setXpToLvlUp(xpToLvlUp : number){
+    this.xpToLvlUp = xpToLvlUp
+  }
+
+  public setInventory(inventory : Item[]) {
+    this.inventory = inventory
+  }
+
   public get getName(): string {
     return `\x1b[32m${this.name.toUpperCase()}\x1b[0m`;
   }
@@ -146,6 +166,7 @@ export default class Hero extends Character {
         item.number += 1
       }  
     }
+    console.log(`${this.name.toLocaleUpperCase()} obtain one ${this.getItem(idItem).name} !`)
 
   }
 

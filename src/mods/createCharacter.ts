@@ -2,14 +2,14 @@ import CharacterInterface from './CharacterInterface';
 import Hero from './Hero';
 import Enemy from './Enemy';
 
-function selectEnemy(characterArray : CharacterInterface[], rarity : number, difficulty: number) {
+export function selectEnemy(characterArray : CharacterInterface[], rarity : number, difficulty: number) {
   const characters = characterArray.filter((character) => character.rarity === rarity);
   const index = Math.ceil(Math.random() * characters.length);
   const character = new Enemy(characters[index - 1], difficulty);
   return character;
 }
 
-function selectHero(characterArray : CharacterInterface[], rarity : number) {
+export function selectHero(characterArray : CharacterInterface[], rarity : number) {
   const characters = characterArray.filter((character) => character.rarity === rarity);
   const index = Math.ceil(Math.random() * characters.length);
   const character = new Hero(characters[index - 1], 12);

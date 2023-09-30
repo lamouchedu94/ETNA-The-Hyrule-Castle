@@ -34,6 +34,10 @@ export default class Enemy extends Character {
     this.maxHp *= difficulty;
   }
 
+  public setMaxHp(maxHp : number) {
+    this.maxHp = maxHp
+  }
+
   public get getName(): string {
     return `\x1b[31m${this.name.toUpperCase()}\x1b[0m`;
   }
@@ -42,7 +46,7 @@ export default class Enemy extends Character {
     let healthBar = '';
     console.log(`\x1b[31m${this.name.toUpperCase()}\x1b[0m`);
     //for (let i = 0; i < this.hp; i += 1) healthBar += '\u2660 ';
-    healthBar = makeBar(this.hp, this.getMaxHp)
+    healthBar = makeBar(this.hp, this.maxHp)
     console.log(`\x1b[35m${healthBar}\x1b[0m`);
     console.log(`HP : ${this.hp}/${this.maxHp}`);
   }
