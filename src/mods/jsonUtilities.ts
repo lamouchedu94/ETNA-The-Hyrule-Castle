@@ -1,9 +1,11 @@
 import { readFileSync } from 'fs';
-import CharacterInterface from './CharacterInterface';
+
+// import CharacterInterface from './CharacterInterface';
 const pathCharacters = './json/players.json';
 const pathEnemies = './json/enemies.json';
 const pathBosses = './json/boss.json';
-const pathSave = './json/save.json'
+const pathSave = './json/save.json';
+const pathObj = "./json/object.json"
 
 export function getSavedGameSetting() {
   try {

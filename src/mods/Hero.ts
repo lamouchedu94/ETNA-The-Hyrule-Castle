@@ -3,7 +3,8 @@ import CharacterInterface from './CharacterInterface';
 import { makeBar } from './hpBar';
 import * as fs from 'fs'
 import { Item } from './objects';
-import { getItemName } from './jsonUtilities';
+
+const rl = require('readline-sync');
 
 export default class Hero extends Character {
 
