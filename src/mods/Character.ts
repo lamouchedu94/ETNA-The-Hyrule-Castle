@@ -56,6 +56,10 @@ export default class Character {
     return this.def;
   }
 
+  public set setDef(value: number) {
+    this.def = value;
+  }
+
   public get getInt(): number {
     return this.int;
   }
@@ -87,6 +91,10 @@ export default class Character {
   get getStr(): number {
     return this.str;
   }
+  public set setStr(value: number) {
+    this.str = value;
+  }
+ 
 
   private dodge(enemy: Character): boolean {
     const dodgeChance = enemy.getSpd - this.spd;

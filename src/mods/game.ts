@@ -6,7 +6,6 @@ import { displayMenu } from './display';
 import gainXp from './lvl_exp';
 import fight from './better_combat_options';
 import getUserInput from './userInput';
-import menu from  './menu'
 import { dropItem } from './objects';
 import * as fs from 'fs'
 import { selectHero } from './createCharacter';
@@ -14,6 +13,8 @@ import CharacterInterface from './CharacterInterface';
 
 
 const rl = require('readline-sync');
+let hero: Hero;
+const pathObj = "./json/object.json";
 
 export default function startGame(game : GameSettings, save : boolean) {
   let fightIsOver : boolean = true;
@@ -58,38 +59,91 @@ export default function startGame(game : GameSettings, save : boolean) {
   const bossArray = getBosses();
   while (floor <= game.getRound && hero.getHp > 0) {
     console.clear();
+
     if (fightIsOver) {
-      if (floor % 10 === 0) enemy = createEnemy(bossArray, game.getDifficulty);
-      else enemy = createEnemy(ennemyArray, game.getDifficulty);
-      console.log(`New enemy appear : ${enemy.getName} ${enemy.getHp}`);
-      fightIsOver = false;
+      if (floor % 10 === 0) enemy = createEnemy(bossArray, game.getDifficulty); 
+      // Create a boss enemy every 10th floor
+      else enemy = createEnemy(enemyArray, game.getDifficulty);
+      console.log(`New enemy appears: ${enemy.getName} ${enemy.getHp}`); 
+      fightIsOver = false; // Set 'fightIsOver' to false as a new fight has started
     }
-    
-    displayRound(floor, hero, enemy);   
-    const repUtil = fight(hero, enemy)
+    // Display the current round information.
+    displayRound(floor, hero, enemy);
+    // call the fight function to get the user's input and resolve the fight.
+    const repUtil = fight(hero, enemy);
+
     if (repUtil === 3) {
-      hero.displayInventory()
+      hero.displayInventory(); 
+
     }
-    if (repUtil === 4){
-      console.log('You leave the fight.');
-      fightIsOver = true;
-    };
-    if (repUtil === 5){
-      displayMenu();
-      menu(getUserInput(), hero, enemy, game)
-    };
-    
-    if (hero.getHp <= 0) console.log('\x1b[31mYOU LOST\x1b[0m');
+    if (repUtil === 4) {
+      console.log('You leave the fight.'); 
+      fightIsOver = true; 
+    }
+    if (repUtil === 5) {
+      displayMenu(); 
+      handleMenuChoice(getUserInput());
+    }
+
+    // Check if the hero or enemy is dead.
+    if (hero.getHp <= 0) console.log('😩☠️      \x1b[31mYOU LOST\x1b[0m   😱💀');
     else if (enemy.getHp <= 0) {
-      console.log(`You beated ${enemy.getName}`);
-      gainXp(hero);
+      console.log(`You defeated ${enemy.getName}`); 
+      gainXp(hero); // Increase the hero's experience points.
       fightIsOver = true;
       game.setFloor(floor+1)
       floor += 1;
       hero.addCoins(1);
       hero.addItem(dropItem())
     }
-    rl.question('Press enter to continue');
+    if (floor)
+      rl.question('Press enter to continue'); 
+  }
+  if (hero.getHp > 0) {
+    console.log("👌You're alive !✨👌"); 
+}
+
+function displayShop() {
+  console.log("================✨Welcome to the Rup'shop✨================"); 
+  console.log(`Wallet: ${hero.getCoins()} Ɍ🪙`);
+  stock.forEach((item: any, index: any) => {
+    console.log(`|${index + 1}. ${item.name} (x${item.stock}) - ${item.price} Ɍ🪙`); 
+  });
+  console.log("============================================================");
+}
+
+function purchaseItem(itemIndex: number) {
+  const selectedItem = stock[itemIndex]; // Get the selected item from the shop's inventory
+  const playerCoins: number | undefined = hero.getCoins(); // get the hero's coins
+  const itemPrice: number | undefined = selectedItem?.price; // get the price of the selected item.
+
+  if (playerCoins !== undefined && itemPrice !== undefined && playerCoins >= itemPrice && selectedItem.stock > 0) {
+    selectedItem.stock -= 1; // Decrement the item's stock.
+    hero.subtractCoins(itemPrice); // Subtract the item's price from the hero's coins.
+    hero.addItem(selectedItem.id); // Add the purchased item to the hero's inventory.
+    console.log(`You have purchased ${selectedItem.name} !`); 
+    console.log(`Wallet🪙 : ${hero.getCoins()} Ɍ\n`); 
+  } else if (selectedItem.stock === 0) {
+    console.log(`Sorry Man, ${selectedItem.name} is out of stock.`); 
+  } else {
+    console.log("Insufficient funds or item not found.");
   }
 }
 
+function handleMenuChoice(choice: number) {
+  switch (choice) {
+    case 1:
+      break;
+    case 2:
+      displayShop();
+      const shopItemChoice = getUserInput();
+      if (shopItemChoice === 0) {
+        // The player chooses to leave the shop.
+      } else if (shopItemChoice >= 1 && shopItemChoice <= stock.length) {
+        purchaseItem(shopItemChoice - 1); // Purchase the selected item from the shop.
+      } else {
+        console.log("Nop dude, invalid selection."); 
+      }
+  }
+}
+}

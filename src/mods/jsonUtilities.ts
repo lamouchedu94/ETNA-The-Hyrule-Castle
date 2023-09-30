@@ -61,13 +61,12 @@ export function getBosses() {
   }
 }
 
-export function getItemName(id : number) : void {
-  //Return name of Item by id
-  const file = readFileSync('./json/potions.json', 'utf-8')
-  const fileContent = JSON.parse(file)
-  for (const item of fileContent) {
-    if (item.id === id) {
-      return item.name
-    }
+export function getObject() {
+  try{
+    const shopInventory = readFileSync(pathObj, 'utf-8');
+    const stock = JSON.parse(shopInventory);
+    return (stock)  ;
+  } catch{
+    throw new Error(`Cannot access file : ${pathObj}`);
   }
 }
