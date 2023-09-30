@@ -53,7 +53,7 @@ export default function startGame() {
   console.log('1 - Let\'s play\t2 - load game\t3 - Quit');
   do {
     userInput = getUserInput()
-  } while (userInput !== 1 && userInput !== 2 && userInput !== 3 && userInput !== 4);
+  } while (userInput !== 1 && userInput !== 2 && userInput !== 3);
   if (userInput === 1) {
     const difficulty = selectDifficulty();
     const round = selectRoundsNumber();
@@ -61,9 +61,9 @@ export default function startGame() {
   } 
   if (userInput === 2) {
     //console.log("Save not implemented yet. Wip")
-    const difficulty = selectDifficulty();
-    const round = selectRoundsNumber();
-    return [new GameSettings(difficulty, round), 1]
+    //const difficulty = selectDifficulty();
+    //const round = selectRoundsNumber();
+    return [new GameSettings(1, 1), 1]
   }
   return null;
 }
