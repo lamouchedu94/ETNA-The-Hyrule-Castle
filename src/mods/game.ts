@@ -1,8 +1,6 @@
-import Hero from './Hero';
-import Enemy from './Enemy';
 import GameSettings from './GameSettings';
 import { getBosses, getCharacters, getEnemies} from './jsonUtilities';
-import { createEnemy, createHero } from './createCharacter';
+import { createEnemy, createHero, selectEnemy } from './createCharacter';
 import { displayRound } from './display';
 import { displayMenu } from './display';
 import gainXp from './lvl_exp';
@@ -11,7 +9,6 @@ import getUserInput from './userInput';
 import menu from  './menu'
 import { dropItem } from './objects';
 import * as fs from 'fs'
-import Character from './Character';
 import { selectHero } from './createCharacter';
 import CharacterInterface from './CharacterInterface';
 
@@ -22,11 +19,17 @@ export default function startGame(game : GameSettings, save : boolean) {
   let fightIsOver : boolean = true;
   let floor = 1;
   let playerArray : CharacterInterface[]
+  let ennemyArray : CharacterInterface[]
   let hero : any
   let enemy : any
   if (save) {
-    //initialise character if save are loaded
-    enemy = getEnemies(save)
+    ennemyArray = getEnemies(save)
+    enemy = selectEnemy(ennemyArray, game.getDifficulty, 1)
+    enemy.setMaxHp(ennemyArray[0].maxHp)
+    // console.log(enemy)
+    // getUserInput()
+
+
     playerArray = getCharacters(save);
     hero = selectHero(playerArray, playerArray[0].rarity)
     hero.setMaxHp(playerArray[0].maxHp)
@@ -35,16 +38,16 @@ export default function startGame(game : GameSettings, save : boolean) {
     hero.setLvl(playerArray[0].lvl)
     hero.setXpToLvlUp(playerArray[0].xpToLvlUp)
     hero.setInventory(playerArray[0].inventory)
+    fightIsOver = false
     
-  }
-  if (!save) {
+  } else {
     playerArray = getCharacters(save);
-    hero = createHero(playerArray);
-    
+    hero = createHero(playerArray);   
+    ennemyArray = getEnemies(save);
+    enemy = createEnemy(ennemyArray, game.getDifficulty);
+
   }
-  const ennemyArray = getEnemies(save);
   const bossArray = getBosses();
-  enemy = createEnemy(ennemyArray, game.getDifficulty);
 
   while (floor <= game.getRound && hero.getHp > 0) {
     console.clear();
@@ -54,6 +57,7 @@ export default function startGame(game : GameSettings, save : boolean) {
       console.log(`New enemy appear : ${enemy.getName} ${enemy.getHp}`);
       fightIsOver = false;
     }
+    
     displayRound(floor, hero, enemy);   
     const repUtil = fight(hero, enemy)
     if (repUtil === 3) {
