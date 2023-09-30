@@ -1,5 +1,5 @@
 import GameSettings from './GameSettings';
-import { getBosses, getCharacters, getEnemies} from './jsonUtilities';
+import { getBosses, getCharacters, getEnemies, getSavedGameSetting} from './jsonUtilities';
 import { createEnemy, createHero, selectEnemy } from './createCharacter';
 import { displayRound } from './display';
 import { displayMenu } from './display';
@@ -23,11 +23,19 @@ export default function startGame(game : GameSettings, save : boolean) {
   let hero : any
   let enemy : any
   if (save) {
+    let temp = getSavedGameSetting()
+    //let game : GameSettings
+    game.setDifficulty(temp.difficulty)
+    game.setRound(temp.round)
+    game.setFloor(temp.floor)
+    floor = game.getFloor
+    //console.log(temp, game)
+    //getUserInput()
+    
     ennemyArray = getEnemies(save)
-    enemy = selectEnemy(ennemyArray, game.getDifficulty, 1)
+    enemy = selectEnemy(ennemyArray, ennemyArray[0].rarity, game.getDifficulty)
     enemy.setMaxHp(ennemyArray[0].maxHp)
-    // console.log(enemy)
-    // getUserInput()
+    //console.log(enemy)
 
 
     playerArray = getCharacters(save);
@@ -48,7 +56,6 @@ export default function startGame(game : GameSettings, save : boolean) {
 
   }
   const bossArray = getBosses();
-
   while (floor <= game.getRound && hero.getHp > 0) {
     console.clear();
     if (fightIsOver) {
@@ -69,7 +76,7 @@ export default function startGame(game : GameSettings, save : boolean) {
     };
     if (repUtil === 5){
       displayMenu();
-      menu(getUserInput(), hero, enemy)
+      menu(getUserInput(), hero, enemy, game)
     };
     
     if (hero.getHp <= 0) console.log('\x1b[31mYOU LOST\x1b[0m');
@@ -77,6 +84,7 @@ export default function startGame(game : GameSettings, save : boolean) {
       console.log(`You beated ${enemy.getName}`);
       gainXp(hero);
       fightIsOver = true;
+      game.setFloor(floor+1)
       floor += 1;
       hero.addCoins(1);
       hero.addItem(dropItem())

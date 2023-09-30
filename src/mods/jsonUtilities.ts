@@ -5,6 +5,15 @@ const pathEnemies = './json/enemies.json';
 const pathBosses = './json/boss.json';
 const pathSave = './json/save.json'
 
+export function getSavedGameSetting() {
+  try {
+    const file = readFileSync(pathSave, 'utf-8');
+    const gameSettingsJson = JSON.parse(file);
+    return gameSettingsJson[2];
+  } catch {
+    throw new Error(`Cannot access file : ${pathCharacters}`);
+  }
+}
 
 export function getCharacters(save : boolean) {
   try {
